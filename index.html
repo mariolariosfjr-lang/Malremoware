@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Malremoware</title>
+  <style>
+    body{
+      background:#111;
+      color:white;
+      font-family:Segoe UI;
+      text-align:center;
+    }
+
+    button{
+      background:red;
+      color:white;
+      border:none;
+      padding:15px;
+      border-radius:8px;
+      font-size:20px;
+      cursor:pointer;
+    }
+
+    .card{
+      background:#1d1d1d;
+      margin:20px auto;
+      padding:20px;
+      width:400px;
+      border-radius:12px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Malremoware Security</h1>
+
+<div class="card">
+  <h2>Quick Scan</h2>
+  <button onclick="scan()">Scan Device</button>
+</div>
+
+<div id="results"></div>
+
+<script>
+async function scan(){
+  document.getElementById("results").innerHTML =
+    "Scanning for malicious files...";
+
+  const res = await fetch("http://localhost:5000/scan");
+  const data = await res.json();
+
+  document.getElementById("results").innerHTML =
+    "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
+}
+</script>
+
+</body>
+</html>
